@@ -1,0 +1,35 @@
+---
+import Name from "../assets/name.svg";
+
+interface Props {
+    titleText?: string;
+    bodyText: string;
+    image?: any;
+}
+
+const { titleText, bodyText, image = Name } = Astro.props;
+---
+
+{
+    titleText?.length > 0 ? (
+        <h1 class="title-text">{titleText}</h1>
+    ) : (
+        <Name class="title-image" />
+    )
+}
+<p class="body-text">{bodyText}</p>
+
+<style>
+    .title-text {
+    }
+    .title-image {
+        width: 100%;
+        height: auto;
+    }
+    p {
+        font-family: var(--font-switzer);
+        font-size: var(--font-size-3);
+        line-height: var(--font-lineheight-5);
+        max-width: var(--size-content-3);
+    }
+</style>
