@@ -2,12 +2,15 @@
 import Layout from "../layouts/Layout.astro";
 import Hero from "../components/Hero.astro";
 
-const bodyText: string =
-    "Sophomore Comp-sci student who cares deeply about beautiful UI/UX \
-    while prioritizing both user \
-    satisfaction and developer experience.";
+const bodyTexts: string[] = [
+    "Sophomore comp-sci student and hobbyist game developer.",
+    "I care deeply about beautiful UI/UX while prioritizing \
+    user satisfaction and developer experience.",
+];
 ---
 
 <Layout>
-    <Hero bodyText={bodyText} />
+    <Hero>
+        {bodyTexts.map((text) => <p class="body-text">{text}</p>)}
+    </Hero>
 </Layout>

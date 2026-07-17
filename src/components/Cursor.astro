@@ -1,0 +1,82 @@
+<div class="cursor"></div>
+
+<style is:global>
+    * {
+        cursor: none;
+    }
+    .cursor {
+        pointer-events: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        mix-blend-mode: difference;
+        background: #fff;
+        opacity: 0;
+        transform: translate(-50%, -50%);
+        transition:
+            width 0.3s,
+            height 0.3s;
+        transition-delay: 0.5s;
+    }
+    .cursor--visible {
+        opacity: 1;
+    }
+    .cursor--hidden {
+        opacity: 0;
+    }
+    .cursor--focused {
+        width: 90px;
+        height: 90px;
+        transition-delay: 0s;
+    }
+</style>
+
+<script>
+    const cursor = document.querySelector(".cursor");
+
+    let mouseX = 0;
+    let mouseY = 0;
+    let cursorX = 0;
+    let cursorY = 0;
+    const speed = 0.15;
+
+    const show = () => {
+        cursor.classList.add("cursor--visible");
+        document.removeEventListener("mousemove", show);
+    };
+    document.addEventListener("mousemove", show);
+
+    document.addEventListener("mousemove", (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    document.addEventListener("mouseleave", () =>
+        cursor.classList.add("cursor--hidden"),
+    );
+    document.addEventListener("mouseenter", () =>
+        cursor.classList.remove("cursor--hidden"),
+    );
+
+    document.querySelectorAll("a, button").forEach((el) => {
+        el.addEventListener("mouseenter", () =>
+            cursor.classList.add("cursor--focused"),
+        );
+        el.addEventListener("mouseleave", () =>
+            cursor.classList.remove("cursor--focused"),
+        );
+    });
+
+    function animate() {
+        cursorX += (mouseX - cursorX) * speed;
+        cursorY += (mouseY - cursorY) * speed;
+        cursor.style.transform = `translate(${cursorX}px, ${cursorY}px) translate(-50%, -50%)`;
+        requestAnimationFrame(animate);
+    }
+
+    animate();
+</script>

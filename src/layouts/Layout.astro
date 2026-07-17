@@ -1,41 +1,56 @@
 ---
 import Head from "../components/Head.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import Cursor from "../components/Cursor.astro";
 import "../styles/reset.css";
 import "../styles/global.css";
-import SocialLinks from "../components/SocialLinks.astro";
 
-const { pageTitle } = Astro.props;
+interface Props {
+    pageTitle?: string;
+    showFooter?: boolean;
+}
+
+const { pageTitle, showFooter = true } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
     <Head pageTitle={pageTitle} />
     <body>
+        <Cursor />
         <div class="wrapper">
-            <SocialLinks />
-            <hr />
+            <SocialLinks variant="navbar" />
             <slot />
-            <hr />
-            <SocialLinks />
+            {showFooter && <SocialLinks variant="footer" />}
         </div>
     </body>
 </html>
 
 <style>
+    *::selection {
+        background: var(--text);
+        color: var(--bg);
+    }
     body {
         background: var(--bg);
         display: grid;
         place-items: center;
-    }
-    hr {
-        width: 100%;
-        border: none;
-        border-top: 1px solid var(--bg-1);
+        padding-inline: var(--size-fluid-2);
     }
     .wrapper {
-        width: 1000px;
+        width: min(100%, 1000px);
         display: flex;
         flex-direction: column;
         gap: var(--size-8);
+    }
+    @media (min-width: 704px) {
+        .wrapper {
+            gap: var(--size-9);
+        }
+    }
+    @media (min-width: 1024px) {
+        .wrapper {
+            gap: var(--size-10);
+        }
     }
 </style>

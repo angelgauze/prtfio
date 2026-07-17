@@ -2,16 +2,15 @@
 import Name from "../assets/name.svg";
 
 interface Props {
-    bodyText: string;
     image?: any;
 }
 
-const { bodyText, image = Name } = Astro.props;
+const { image = Name } = Astro.props;
 ---
 
 <main>
     <Name class="title-image" />
-    <p class="body-text">{bodyText}</p>
+    <slot />
 </main>
 
 <style>
@@ -22,11 +21,37 @@ const { bodyText, image = Name } = Astro.props;
     .title-image {
         width: 100%;
         height: auto;
+        margin-block: 0 var(--size-8);
     }
-    p {
+    main :global(p) {
+        color: var(--muted);
         font-family: var(--font-switzer);
-        font-size: var(--font-size-3);
-        line-height: var(--font-lineheight-5);
-        max-width: var(--size-content-3);
+        font-size: var(--font-size-1);
+        line-height: var(--font-lineheight-3);
+        max-width: 28ch;
+        &:not(:last-child) {
+            margin-bottom: var(--size-3);
+        }
+    }
+    @media (min-width: 705px) {
+        main :global(p) {
+            font-size: var(--font-size-3);
+            line-height: var(--font-lineheight-4);
+            max-width: var(--size-content-2);
+            &:not(:last-child) {
+                margin-bottom: var(--size-4);
+            }
+        }
+    }
+    @media (min-width: 1024px) {
+        .title-image {
+            margin-block: var(--size-4) var(--size-10);
+        }
+        main :global(p) {
+            max-width: var(--size-content-3);
+            &:not(:last-child) {
+                margin-bottom: var(--size-5);
+            }
+        }
     }
 </style>

@@ -1,15 +1,34 @@
 ---
 import socials from "../data/socials.json";
+import nav from "../data/nav.json";
+
+interface Props {
+    variant: "navbar" | "footer";
+}
+
+const { variant } = Astro.props;
+const links = variant === "navbar" ? nav : socials;
+const currentPath = Astro.url.pathname;
 ---
 
-<nav>
+<nav data-variant={variant}>
     <ul>
         {
-            socials.map((social: { name: string; url: string }) => (
-                <li>
-                    <a href={social.url}>{social.name}</a>
-                </li>
-            ))
+            links.map((link: { name: string; url: string }) => {
+                const isCurrent =
+                    variant === "navbar" && link.url === currentPath;
+                return (
+                    <li>
+                        <a
+                            href={link.url}
+                            aria-current={isCurrent ? "page" : undefined}
+                            class:list={{ "is-current": isCurrent }}
+                        >
+                            {link.name}
+                        </a>
+                    </li>
+                );
+            })
         }
     </ul>
 </nav>
@@ -19,34 +38,32 @@ import socials from "../data/socials.json";
         padding: 0;
         list-style: none;
         display: flex;
-        gap: var(--size-6);
+        gap: var(--size-4);
+        padding-block: var(--size-4);
     }
     a {
         text-decoration: none;
-        font-size: var(--font-size-1);
+        font-size: 14px;
         color: var(--text);
         &:hover {
             text-decoration: underline;
         }
     }
-    a::after {
-        content: "";
-        position: absolute;
-        inset-inline: 0;
-        bottom: -0.15em;
-        height: 2px;
-        background: currentColor;
-
-        transform: scaleX(0);
-        transform-origin: left;
-        transition: transform 300ms cubic-bezier(0.65, 0, 0.35, 1);
+    .is-current {
+        font-weight: 500;
     }
-
-    a:hover::after {
-        transform: scaleX(1);
+    nav[data-variant="navbar"] {
+        border-bottom: 1px solid var(--bg-1);
     }
-
-    a:not(:hover)::after {
-        transform-origin: right;
+    nav[data-variant="footer"] {
+        border-top: 1px solid var(--bg-1);
+    }
+    @media (min-width: 705px) {
+        ul {
+            padding-block: var(--size-6);
+        }
+        a {
+            font-size: var(--font-size-1);
+        }
     }
 </style>
