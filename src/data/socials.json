@@ -1,22 +1,22 @@
 [
 	{
-		"name": "GitHub",
+		"name": "github",
 		"url": "https://github.com/angelgauze"
 	},
 	{
-		"name": "LinkedIn",
+		"name": "linkedin",
 		"url": "https://www.linkedin.com/in/zachquita/"
 	},
 	{
-		"name": "Discord",
+		"name": "discord",
 		"url": "https://discord.com/users/906446744169107466"
 	},
 	{
+		"name": "cv",
+		"url": "/documents/CV.pdf"
+	},
+{
 		"name": "@mail",
 		"url": "mailto:angelgauze@proton.me"
-	},
-	{
-		"name": "CV",
-		"url": "/documents/CV.pdf"
 	}
 ]

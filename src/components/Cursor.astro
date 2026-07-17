@@ -10,29 +10,28 @@
         top: 0;
         left: 0;
         z-index: 1000;
-        width: 32px;
-        height: 32px;
+        width: 0;
+        height: 0;
         border-radius: 50%;
         mix-blend-mode: difference;
         background: #fff;
-        opacity: 0;
         transform: translate(-50%, -50%);
         transition:
-            width 0.3s,
-            height 0.3s,
-            opacity 0.3s;
-        transition-delay: 0.5s;
+            width 0.4s ease 0.5s,
+            height 0.4s ease 0.5s,
+            opacity 0.3s ease;
     }
     .cursor--visible {
-        opacity: 1;
-        transition-delay: 0s;
+        width: 32px;
+        height: 32px;
     }
     .cursor--hidden {
-        opacity: 0;
+        width: 0;
+        height: 0;
     }
     .cursor--focused {
-        width: 90px;
-        height: 90px;
+        width: 92px;
+        height: 92px;
         transition-delay: 0s;
     }
 </style>
@@ -44,7 +43,7 @@
     let mouseY = 0;
     let cursorX = 0;
     let cursorY = 0;
-    const speed = 0.15;
+    const speed = 0.13;
 
     const show = (e) => {
         mouseX = e.clientX;
