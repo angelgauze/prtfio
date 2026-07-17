@@ -1,18 +1,13 @@
 ---
-import Main from "../components/Main.astro";
 import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
 
-const titleText: string = "angelgauze";
 const bodyText: string =
     "Sophomore Comp-sci student who cares deeply about beautiful UI/UX \
     while prioritizing both user \
     satisfaction and developer experience.";
-
-import Hero from "../components/Hero.astro";
 ---
 
 <Layout>
-    <Main>
-        <Hero bodyText={bodyText} />
-    </Main>
+    <Hero bodyText={bodyText} />
 </Layout>

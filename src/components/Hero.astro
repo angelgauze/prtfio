@@ -2,25 +2,22 @@
 import Name from "../assets/name.svg";
 
 interface Props {
-    titleText?: string;
     bodyText: string;
     image?: any;
 }
 
-const { titleText, bodyText, image = Name } = Astro.props;
+const { bodyText, image = Name } = Astro.props;
 ---
 
-{
-    titleText?.length > 0 ? (
-        <h1 class="title-text">{titleText}</h1>
-    ) : (
-        <Name class="title-image" />
-    )
-}
-<p class="body-text">{bodyText}</p>
+<main>
+    <Name class="title-image" />
+    <p class="body-text">{bodyText}</p>
+</main>
 
 <style>
-    .title-text {
+    main {
+        color: var(--text);
+        container-type: inline-size;
     }
     .title-image {
         width: 100%;
