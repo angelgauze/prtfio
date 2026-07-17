@@ -1,0 +1,14 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Hero from "../components/Hero.astro";
+
+const bodyTexts: string[] = [
+    "When I'm not doing assignments, you can find me coding all sorts of things.",
+];
+---
+
+<Layout>
+    <Hero titleText="Projects">
+        {bodyTexts.map((text) => <p class="body-text">{text}</p>)}
+    </Hero>
+</Layout>

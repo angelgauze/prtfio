@@ -2,14 +2,22 @@
 import Name from "../assets/name.svg";
 
 interface Props {
+    titleText?: string;
     image?: any;
 }
 
-const { image = Name } = Astro.props;
+const { titleText, image = Name } = Astro.props;
 ---
 
 <main>
-    <Name class="title-image" />
+    {
+        titleText ? (
+            <h1 class="title-text">{titleText}</h1>
+        ) : (
+            <Name class="title-image" />
+        )
+    }
+
     <slot />
 </main>
 
@@ -22,6 +30,10 @@ const { image = Name } = Astro.props;
         width: 100%;
         height: auto;
         margin-block: 0 var(--size-8);
+    }
+    .title-text {
+        font-family: var(--font-instrument-serif);
+        font-size: var(--font-size-fluid-3);
     }
     main :global(p) {
         color: var(--muted);

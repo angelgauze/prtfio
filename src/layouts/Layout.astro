@@ -2,6 +2,7 @@
 import Head from "../components/Head.astro";
 import SocialLinks from "../components/SocialLinks.astro";
 import Cursor from "../components/Cursor.astro";
+import { ClientRouter } from "astro:transitions";
 import "../styles/reset.css";
 import "../styles/global.css";
 
@@ -16,6 +17,7 @@ const { pageTitle, showFooter = true } = Astro.props;
 <!doctype html>
 <html lang="en">
     <Head pageTitle={pageTitle} />
+    <ClientRouter />
     <body>
         <Cursor />
         <div class="wrapper">

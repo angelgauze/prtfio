@@ -1,4 +1,4 @@
-<div class="cursor"></div>
+<div class="cursor" transition:persist></div>
 
 <style is:global>
     * {
@@ -19,11 +19,13 @@
         transform: translate(-50%, -50%);
         transition:
             width 0.3s,
-            height 0.3s;
+            height 0.3s,
+            opacity 0.3s;
         transition-delay: 0.5s;
     }
     .cursor--visible {
         opacity: 1;
+        transition-delay: 0s;
     }
     .cursor--hidden {
         opacity: 0;
@@ -44,7 +46,11 @@
     let cursorY = 0;
     const speed = 0.15;
 
-    const show = () => {
+    const show = (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+        cursorX = mouseX;
+        cursorY = mouseY;
         cursor.classList.add("cursor--visible");
         document.removeEventListener("mousemove", show);
     };
@@ -62,13 +68,15 @@
         cursor.classList.remove("cursor--hidden"),
     );
 
-    document.querySelectorAll("a, button").forEach((el) => {
-        el.addEventListener("mouseenter", () =>
-            cursor.classList.add("cursor--focused"),
-        );
-        el.addEventListener("mouseleave", () =>
-            cursor.classList.remove("cursor--focused"),
-        );
+    document.addEventListener("mouseover", (e) => {
+        if (e.target.matches("a, button")) {
+            cursor.classList.add("cursor--focused");
+        }
+    });
+    document.addEventListener("mouseout", (e) => {
+        if (e.target.matches("a, button")) {
+            cursor.classList.remove("cursor--focused");
+        }
     });
 
     function animate() {
